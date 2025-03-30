@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://h3h86yy12dsj"]
+
+[ext_resource type="Shader" uid="uid://bxf00p8v5u8yl" path="res://features/shaders/hovercard.gdshader" id="1_qde43"]
+
+[resource]
+shader = ExtResource("1_qde43")

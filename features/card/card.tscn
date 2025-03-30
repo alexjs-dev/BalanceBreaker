@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://df5qyw63v1o7k"]
+
+[ext_resource type="Script" uid="uid://crxie574k6a8g" path="res://features/card/card.gd" id="1_4hiay"]
+[ext_resource type="Texture2D" uid="uid://ditji348a4e1k" path="res://assets/card-front.png" id="2_7oeae"]
+[ext_resource type="Script" uid="uid://cewym5qp80d3h" path="res://features/card/card_data.gd" id="2_qfeef"]
+[ext_resource type="Shader" uid="uid://clyxw7flf6wl5" path="res://features/shaders/red_tint.gdshader" id="3_igsg2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ddbgg"]
+
+[sub_resource type="Resource" id="Resource_ddbgg"]
+script = ExtResource("2_qfeef")
+element = "Fire"
+tier = 1
+display_name = "Fire"
+metadata/_custom_type_script = "uid://cewym5qp80d3h"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_igsg2"]
+resource_local_to_scene = true
+shader = ExtResource("3_igsg2")
+shader_parameter/tint_strength = 0.22
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iywne"]
+atlas = ExtResource("2_7oeae")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
+size = Vector2(128, 190)
+
+[node name="Card" type="Node2D" groups=["card"]]
+material = SubResource("ShaderMaterial_ddbgg")
+script = ExtResource("1_4hiay")
+card_data = SubResource("Resource_ddbgg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_igsg2")
+texture = SubResource("AtlasTexture_iywne")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_iywne")
+
+[node name="Title" type="Label" parent="."]
+offset_left = -43.0
+offset_top = 49.0
+offset_right = 4.0
+offset_bottom = 72.0
+text = "Water"
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

@@ -1,0 +1,457 @@
+[gd_scene load_steps=42 format=3 uid="uid://wqka872mq3t6"]
+
+[ext_resource type="Script" uid="uid://djsk667xqnjln" path="res://features/game/game_state.gd" id="1_0tnpc"]
+[ext_resource type="Script" uid="uid://dqjf21dqg0v24" path="res://features/grid/grid_manager.gd" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://dys287jpfd314" path="res://features/card/card_manager.gd" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://crqpv70sojwnh" path="res://features/hand/player_hand.gd" id="3_lnu2h"]
+[ext_resource type="AudioStream" uid="uid://bs1q7pfgktdoq" path="res://sfx/card-slide-1.ogg" id="4_rysoc"]
+[ext_resource type="Script" uid="uid://7d4g8u23vnmb" path="res://features/input/input_manager.gd" id="5_iywne"]
+[ext_resource type="Texture2D" uid="uid://dd7lyhyjcikjb" path="res://assets/card-back.png" id="6_p57ef"]
+[ext_resource type="AudioStream" uid="uid://d2gn2bdrfanha" path="res://sfx/card-slide-2.ogg" id="6_ssvqc"]
+[ext_resource type="Script" uid="uid://u774ur73x21v" path="res://features/deck/deck.gd" id="6_u5sy4"]
+[ext_resource type="AudioStream" uid="uid://c3pk818urugdb" path="res://sfx/Paper Crumple Crumpling Scrunch Crunch Sfx.wav" id="7_264po"]
+[ext_resource type="Script" uid="uid://bdjtbyrwyiasv" path="res://features/trash/trash.gd" id="7_gee14"]
+[ext_resource type="Texture2D" uid="uid://b1safwwsap77q" path="res://assets/trash.png" id="7_u5sy4"]
+[ext_resource type="AudioStream" uid="uid://c3dm4p70n52gj" path="res://sfx/chips-stack-1.ogg" id="8_wljb1"]
+[ext_resource type="Script" uid="uid://be2gckswo5qka" path="res://features/gameui/game_ui.gd" id="10_vtaks"]
+[ext_resource type="Shader" uid="uid://bkg3qsiqd1mhu" path="res://features/shaders/vhs.gdshader" id="11_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://cksxtna1echs7" path="res://features/ui/button.tscn" id="11_trtic"]
+[ext_resource type="AudioStream" uid="uid://xwrbm4xab5di" path="res://music/JDSherbert - Nostalgia Music Pack - Retrocadia.wav" id="12_dinhu"]
+[ext_resource type="Script" uid="uid://dthuyjj6bpa83" path="res://features/ui/cancel_button.gd" id="12_ir15t"]
+[ext_resource type="Script" uid="uid://8w4qanfe4sqg" path="res://features/misc/disable_mouse.gd" id="13_ca42v"]
+[ext_resource type="Shader" uid="uid://kvqhx237jn30" path="res://features/shaders/bg_balatro.gdshader" id="16_ca42v"]
+[ext_resource type="Texture2D" uid="uid://ditji348a4e1k" path="res://assets/card-front.png" id="20_1kice"]
+[ext_resource type="Shader" uid="uid://clyxw7flf6wl5" path="res://features/shaders/red_tint.gdshader" id="20_5newe"]
+[ext_resource type="Script" uid="uid://btaqkcv56qknp" path="res://features/menu/menu_game_over.gd" id="20_37s47"]
+[ext_resource type="Script" uid="uid://cuynwv3mgern6" path="res://features/ui/game_start.gd" id="23_bt5mj"]
+[ext_resource type="Script" uid="uid://by473e6b4yc5g" path="res://features/ui/shop_menu/menu_game_upgrades.gd" id="24_bhx41"]
+[ext_resource type="Script" uid="uid://cvd6inc8e307o" path="res://features/ui/shop_menu/shop_menu_play_button.gd" id="24_e1j6l"]
+[ext_resource type="Texture2D" uid="uid://bbekkrthf2rgb" path="res://assets/rules.png" id="24_sww3w"]
+[ext_resource type="Script" uid="uid://c4bvbri525mke" path="res://features/ui/shop_menu/shop_menu_buy_random.gd" id="25_pl11u"]
+[ext_resource type="Script" uid="uid://bt0kvo82jxqaa" path="res://features/ui/shop_menu/shop_menu_upgrade_random.gd" id="27_qnb83"]
+[ext_resource type="Script" uid="uid://cmwsudep83de2" path="res://features/animations/display_value.gd" id="29_suyxu"]
+[ext_resource type="Script" uid="uid://djxtup1y5sii4" path="res://features/shop/shop.gd" id="30_sgl2t"]
+[ext_resource type="Script" uid="uid://cgbvwkw1knpxr" path="res://features/ui/popup_text.gd" id="31_qouja"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5sy4"]
+atlas = ExtResource("6_p57ef")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
+size = Vector2(126, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gee14"]
+atlas = ExtResource("7_u5sy4")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gee14"]
+size = Vector2(130, 158)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trtic"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dinhu"]
+resource_local_to_scene = true
+shader = ExtResource("11_kvpfn")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.198
+shader_parameter/scanlines_width = 0.116
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(1152, 648)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 21.817
+shader_parameter/roll_variation = 0.644
+shader_parameter/distort_intensity = 0.0
+shader_parameter/noise_opacity = 0.187
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.094
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.275
+
+[sub_resource type="Environment" id="Environment_ca42v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rysoc"]
+shader = ExtResource("16_ca42v")
+shader_parameter/spin_rotation_speed = 4.0
+shader_parameter/move_speed = 3.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(0.817268, 0.0535649, 0.832566, 1)
+shader_parameter/colour_2 = Color(0.148927, 0.275869, 1, 1)
+shader_parameter/colour_3 = Color(0.086, 0.137, 0.145, 1)
+shader_parameter/contrast = 5.0
+shader_parameter/lighting = 0.2
+shader_parameter/spin_amount = 0.2
+shader_parameter/pixel_filter = 400.0
+shader_parameter/is_rotating = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37s47"]
+shader = ExtResource("20_5newe")
+shader_parameter/tint_strength = 0.121
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_0tnpc")
+
+[node name="GridManager" type="Node2D" parent="."]
+position = Vector2(-579, -315)
+script = ExtResource("1_uwrxv")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(-4, 0)
+scale = Vector2(3.89225, 3.59822)
+
+[node name="PlayerHand" type="Node2D" parent="."]
+script = ExtResource("3_lnu2h")
+
+[node name="CardSpawnSound" type="AudioStreamPlayer2D" parent="PlayerHand"]
+stream = ExtResource("4_rysoc")
+
+[node name="CardManager" type="Node2D" parent="."]
+position = Vector2(-579, -315)
+script = ExtResource("2_yqjtg")
+
+[node name="CardPlaceSound" type="AudioStreamPlayer2D" parent="CardManager"]
+stream = ExtResource("6_ssvqc")
+
+[node name="TrashPlaceSound" type="AudioStreamPlayer2D" parent="CardManager"]
+stream = ExtResource("7_264po")
+
+[node name="CardWinSound" type="AudioStreamPlayer2D" parent="CardManager"]
+stream = ExtResource("8_wljb1")
+
+[node name="InputManager" type="Node2D" parent="."]
+script = ExtResource("5_iywne")
+
+[node name="Deck" type="Node2D" parent="."]
+script = ExtResource("6_u5sy4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Deck"]
+position = Vector2(-516, 229)
+texture = SubResource("AtlasTexture_u5sy4")
+
+[node name="Area2D" type="Area2D" parent="Deck"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deck/Area2D"]
+position = Vector2(-516, 229)
+shape = SubResource("RectangleShape2D_u5sy4")
+
+[node name="Label" type="Label" parent="Deck"]
+offset_left = -531.0
+offset_top = 186.0
+offset_right = -491.0
+offset_bottom = 274.0
+theme_override_font_sizes/font_size = 64
+text = "2"
+
+[node name="Trash" type="Node2D" parent="."]
+script = ExtResource("7_gee14")
+
+[node name="Sprite2D" type="Sprite2D" parent="Trash"]
+position = Vector2(508, 246)
+texture = SubResource("AtlasTexture_gee14")
+
+[node name="Label" type="Label" parent="Trash"]
+offset_left = 494.0
+offset_top = 227.0
+offset_right = 534.0
+offset_bottom = 294.0
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[node name="Area2D" type="Area2D" parent="Trash" groups=["trash"]]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trash/Area2D"]
+position = Vector2(508, 243)
+shape = SubResource("RectangleShape2D_gee14")
+
+[node name="GameStateManager" type="Node2D" parent="."]
+
+[node name="GameUI" type="Node2D" parent="."]
+script = ExtResource("10_vtaks")
+
+[node name="CancelButton" parent="GameUI" instance=ExtResource("11_trtic")]
+material = SubResource("ShaderMaterial_trtic")
+text = "Cancel"
+script = ExtResource("12_ir15t")
+
+[node name="Points" type="Label" parent="GameUI"]
+offset_left = 503.0
+offset_top = -323.0
+offset_right = 543.0
+offset_bottom = -278.0
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="TargetPoints" type="Label" parent="GameUI"]
+offset_left = 489.0
+offset_top = -297.0
+offset_right = 571.0
+offset_bottom = -230.0
+theme_override_colors/font_color = Color(0.757327, 0.123432, 0.179089, 1)
+theme_override_font_sizes/font_size = 48
+text = "100"
+
+[node name="CenterEffectLabel" type="Label" parent="GameUI"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 64
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("13_ca42v")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_dinhu")
+offset_left = -101.0
+offset_top = -144.0
+offset_right = 1320.0
+offset_bottom = 687.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_dinhu")
+autoplay = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ca42v")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="WorldEnvironment"]
+modulate = Color(0.698264, 0.59493, 0.987552, 1)
+rotation = 0.0663225
+color = Color(0.320579, 0.594095, 0.662042, 1)
+energy = 0.2
+height = 0.02
+max_distance = 3901.0
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+z_index = -2
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_rysoc")
+offset_left = -88.0
+offset_top = -141.0
+offset_right = 1327.0
+offset_bottom = 678.0
+
+[node name="GameMenuUI" type="Node2D" parent="."]
+
+[node name="MenuGameOver" type="Control" parent="GameMenuUI"]
+visible = false
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_left = -566.0
+offset_top = -325.0
+offset_right = 564.0
+offset_bottom = 317.0
+script = ExtResource("20_37s47")
+
+[node name="Sprite2D" type="Sprite2D" parent="GameMenuUI/MenuGameOver"]
+material = SubResource("ShaderMaterial_37s47")
+position = Vector2(561.5, 323)
+scale = Vector2(9.44531, 3.87368)
+texture = ExtResource("20_1kice")
+
+[node name="MarginContainer" type="MarginContainer" parent="GameMenuUI/MenuGameOver"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.02
+anchor_top = 0.014
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.399998
+offset_top = 0.0120001
+offset_right = -18.0
+offset_bottom = -9.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameMenuUI/MenuGameOver/MarginContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.61
+alignment = 1
+
+[node name="MainLabel" type="Label" parent="GameMenuUI/MenuGameOver/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubLabel" type="Label" parent="GameMenuUI/MenuGameOver/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "You have gotten 0 points"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="GameMenuUI/MenuGameOver/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Restart"
+
+[node name="MenuGameWelcome" type="Control" parent="GameMenuUI"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_left = -563.0
+offset_top = -324.0
+offset_right = 567.0
+offset_bottom = 318.0
+script = ExtResource("23_bt5mj")
+
+[node name="Sprite2D" type="Sprite2D" parent="GameMenuUI/MenuGameWelcome"]
+material = SubResource("ShaderMaterial_37s47")
+position = Vector2(561.5, 324)
+scale = Vector2(9.44531, 3.87368)
+texture = ExtResource("20_1kice")
+
+[node name="Rules" type="Sprite2D" parent="GameMenuUI/MenuGameWelcome"]
+position = Vector2(556.5, 328.55)
+scale = Vector2(0.51331, 0.588401)
+texture = ExtResource("24_sww3w")
+
+[node name="MarginContainer" type="MarginContainer" parent="GameMenuUI/MenuGameWelcome"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.02
+anchor_top = 0.014
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.399998
+offset_top = 0.0120001
+offset_right = -18.0
+offset_bottom = -9.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameMenuUI/MenuGameWelcome/MarginContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.61
+alignment = 2
+
+[node name="MainLabel" type="Label" parent="GameMenuUI/MenuGameWelcome/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "Welcome"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubLabel" type="Label" parent="GameMenuUI/MenuGameWelcome/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "Game made by Alex Dmitrijev (Marswake Games)
+for TalTech Gamejam 2025"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="GameMenuUI/MenuGameWelcome/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Play Game"
+
+[node name="MenuGameUpgrades" type="Control" parent="GameMenuUI"]
+visible = false
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_left = -563.0
+offset_top = -324.0
+offset_right = 567.0
+offset_bottom = 318.0
+script = ExtResource("24_bhx41")
+
+[node name="Sprite2D" type="Sprite2D" parent="GameMenuUI/MenuGameUpgrades"]
+material = SubResource("ShaderMaterial_37s47")
+position = Vector2(561.5, 324)
+scale = Vector2(9.44531, 3.87368)
+texture = ExtResource("20_1kice")
+
+[node name="MarginContainer" type="MarginContainer" parent="GameMenuUI/MenuGameUpgrades"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.02
+anchor_top = 0.014
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.399998
+offset_top = 0.0120001
+offset_right = -18.0
+offset_bottom = -9.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameMenuUI/MenuGameUpgrades/MarginContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.61
+alignment = 2
+
+[node name="MainLabel" type="Label" parent="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubLabel" type="Label" parent="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "Get Random card (Tier 1-3) or Upgrade existing"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PointsCountLabel" type="Label" parent="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "You have 0 coins"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Continue"
+script = ExtResource("24_e1j6l")
+
+[node name="RandomCard" type="Button" parent="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Random Card (10)"
+script = ExtResource("25_pl11u")
+
+[node name="UpgradeCard" type="Button" parent="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Upgrade Card (20)"
+script = ExtResource("27_qnb83")
+
+[node name="GameUI" type="Node" parent="GameMenuUI/MenuGameUpgrades"]
+
+[node name="DisplayValue" type="Node2D" parent="."]
+script = ExtResource("29_suyxu")
+
+[node name="Shop" type="Node2D" parent="."]
+script = ExtResource("30_sgl2t")
+
+[node name="Popup" type="Node2D" parent="."]
+script = ExtResource("31_qouja")
+
+[connection signal="pressed" from="GameUI/CancelButton" to="GameUI/CancelButton" method="_on_pressed"]
+[connection signal="visibility_changed" from="GameMenuUI/MenuGameOver" to="GameMenuUI/MenuGameOver" method="_on_visibility_changed"]
+[connection signal="pressed" from="GameMenuUI/MenuGameOver/MarginContainer/VBoxContainer/Button" to="GameMenuUI/MenuGameOver" method="_on_button_pressed"]
+[connection signal="visibility_changed" from="GameMenuUI/MenuGameWelcome" to="GameMenuUI/MenuGameWelcome" method="_on_visibility_changed"]
+[connection signal="pressed" from="GameMenuUI/MenuGameWelcome/MarginContainer/VBoxContainer/Button" to="GameMenuUI/MenuGameWelcome" method="_on_button_pressed"]
+[connection signal="visibility_changed" from="GameMenuUI/MenuGameUpgrades" to="GameMenuUI/MenuGameUpgrades" method="_on_visibility_changed"]
+[connection signal="pressed" from="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer/Play" to="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer/Play" method="_on_pressed"]
+[connection signal="pressed" from="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer/RandomCard" to="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer/RandomCard" method="_on_pressed"]
+[connection signal="pressed" from="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer/UpgradeCard" to="GameMenuUI/MenuGameUpgrades/MarginContainer/VBoxContainer/UpgradeCard" method="_on_pressed"]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3pk818urugdb"
+path="res://.godot/imported/Paper Crumple Crumpling Scrunch Crunch Sfx.wav-a99d4642255cfa44735c8e7e75c84959.sample"
+
+[deps]
+
+source_file="res://sfx/Paper Crumple Crumpling Scrunch Crunch Sfx.wav"
+dest_files=["res://.godot/imported/Paper Crumple Crumpling Scrunch Crunch Sfx.wav-a99d4642255cfa44735c8e7e75c84959.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

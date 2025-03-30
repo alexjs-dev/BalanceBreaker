@@ -1,0 +1,222 @@
+[gd_scene load_steps=23 format=3 uid="uid://wqka872mq3t6"]
+
+[ext_resource type="Script" uid="uid://djsk667xqnjln" path="res://features/game/game_state.gd" id="1_0tnpc"]
+[ext_resource type="Script" uid="uid://dqjf21dqg0v24" path="res://features/grid/grid_manager.gd" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://dys287jpfd314" path="res://features/card/card_manager.gd" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://crqpv70sojwnh" path="res://features/hand/player_hand.gd" id="3_lnu2h"]
+[ext_resource type="Script" uid="uid://7d4g8u23vnmb" path="res://features/input/input_manager.gd" id="5_iywne"]
+[ext_resource type="Texture2D" uid="uid://dd7lyhyjcikjb" path="res://assets/card-back.png" id="6_p57ef"]
+[ext_resource type="Script" uid="uid://u774ur73x21v" path="res://features/deck/deck.gd" id="6_u5sy4"]
+[ext_resource type="Script" uid="uid://bdjtbyrwyiasv" path="res://features/trash/trash.gd" id="7_gee14"]
+[ext_resource type="Texture2D" uid="uid://b1safwwsap77q" path="res://assets/trash.png" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://be2gckswo5qka" path="res://features/gameui/game_ui.gd" id="10_vtaks"]
+[ext_resource type="Script" uid="uid://bqpf14m0kd1jx" path="res://features/ui/button.gd" id="11_ir15t"]
+[ext_resource type="Shader" uid="uid://bkg3qsiqd1mhu" path="res://features/shaders/vhs.gdshader" id="11_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://5wag32iqits0" path="res://assets/button.png" id="11_kvuet"]
+[ext_resource type="AudioStream" uid="uid://xwrbm4xab5di" path="res://music/JDSherbert - Nostalgia Music Pack - Retrocadia.wav" id="12_dinhu"]
+[ext_resource type="Shader" uid="uid://bkj0w3hkaxktb" path="res://features/shaders/shine.gdshader" id="12_trtic"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5sy4"]
+atlas = ExtResource("6_p57ef")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
+size = Vector2(126, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gee14"]
+atlas = ExtResource("7_u5sy4")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gee14"]
+size = Vector2(130, 158)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ca42v"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ir15t"]
+resource_local_to_scene = true
+shader = ExtResource("12_trtic")
+shader_parameter/Line_Smoothness = 0.027
+shader_parameter/Line_Width = 0.095
+shader_parameter/Brightness = 1.0
+shader_parameter/Rotation_deg = 26.252
+shader_parameter/Distortion = 1.73
+shader_parameter/Speed = 0.2
+shader_parameter/Position = 0.195
+shader_parameter/Position_Min = 1.0
+shader_parameter/Position_Max = 2.0
+shader_parameter/Alpha = 0.225
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dinhu"]
+resource_local_to_scene = true
+shader = ExtResource("11_kvpfn")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.198
+shader_parameter/scanlines_width = 0.116
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(1152, 648)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 21.817
+shader_parameter/roll_variation = 0.644
+shader_parameter/distort_intensity = 0.0
+shader_parameter/noise_opacity = 0.187
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.094
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.275
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_0tnpc")
+
+[node name="GridManager" type="Node2D" parent="."]
+position = Vector2(-579, -315)
+script = ExtResource("1_uwrxv")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(-4, 0)
+scale = Vector2(3.89225, 3.59822)
+
+[node name="PlayerHand" type="Node2D" parent="."]
+script = ExtResource("3_lnu2h")
+
+[node name="CardManager" type="Node2D" parent="."]
+position = Vector2(-579, -315)
+script = ExtResource("2_yqjtg")
+
+[node name="InputManager" type="Node2D" parent="."]
+script = ExtResource("5_iywne")
+
+[node name="Deck" type="Node2D" parent="."]
+script = ExtResource("6_u5sy4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Deck"]
+position = Vector2(-516, 229)
+texture = SubResource("AtlasTexture_u5sy4")
+
+[node name="Area2D" type="Area2D" parent="Deck"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deck/Area2D"]
+position = Vector2(-516, 229)
+shape = SubResource("RectangleShape2D_u5sy4")
+
+[node name="Label" type="Label" parent="Deck"]
+offset_left = -531.0
+offset_top = 186.0
+offset_right = -491.0
+offset_bottom = 274.0
+theme_override_font_sizes/font_size = 64
+text = "2"
+
+[node name="Trash" type="Node2D" parent="."]
+script = ExtResource("7_gee14")
+
+[node name="Sprite2D" type="Sprite2D" parent="Trash"]
+position = Vector2(508, 246)
+texture = SubResource("AtlasTexture_gee14")
+
+[node name="Label" type="Label" parent="Trash"]
+offset_left = 494.0
+offset_top = 227.0
+offset_right = 534.0
+offset_bottom = 294.0
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[node name="Area2D" type="Area2D" parent="Trash" groups=["trash"]]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trash/Area2D"]
+position = Vector2(508, 243)
+shape = SubResource("RectangleShape2D_gee14")
+
+[node name="GameStateManager" type="Node2D" parent="."]
+
+[node name="GameUI" type="Node2D" parent="."]
+script = ExtResource("10_vtaks")
+
+[node name="Points" type="Label" parent="GameUI"]
+offset_left = 503.0
+offset_top = -323.0
+offset_right = 543.0
+offset_bottom = -278.0
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="TargetPoints" type="Label" parent="GameUI"]
+offset_left = 489.0
+offset_top = -297.0
+offset_right = 571.0
+offset_bottom = -230.0
+theme_override_colors/font_color = Color(0.757327, 0.123432, 0.179089, 1)
+theme_override_font_sizes/font_size = 48
+text = "100"
+
+[node name="CenterEffectLabel" type="Label" parent="GameUI"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 64
+
+[node name="Button" type="Button" parent="GameUI"]
+modulate = Color(0.827158, 0.823741, 1, 1)
+material = SubResource("ShaderMaterial_ca42v")
+offset_left = 370.0
+offset_top = -32.0
+offset_right = 512.0
+offset_bottom = 41.0
+script = ExtResource("11_ir15t")
+
+[node name="Sprite2D" type="Sprite2D" parent="GameUI/Button"]
+position = Vector2(70.5, 35.5)
+scale = Vector2(1.21239, 1.23729)
+texture = ExtResource("11_kvuet")
+
+[node name="Label" type="Label" parent="GameUI/Button"]
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 70.0
+text = "Cancel"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GameUI/Button"]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="GameUI/Button/CanvasLayer"]
+material = SubResource("ShaderMaterial_ir15t")
+anchors_preset = -1
+anchor_left = 0.381
+anchor_top = 0.007
+anchor_right = 0.381
+anchor_bottom = 0.007
+offset_left = -58.912
+offset_top = -24.536
+offset_right = 62.088
+offset_bottom = 30.464
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_dinhu")
+offset_left = -101.0
+offset_top = -144.0
+offset_right = 1320.0
+offset_bottom = 687.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_dinhu")
+autoplay = true
+
+[connection signal="button_down" from="GameUI/Button" to="GameUI/Button" method="_on_button_down"]
+[connection signal="focus_entered" from="GameUI/Button" to="GameUI/Button" method="_on_focus_entered"]
+[connection signal="focus_exited" from="GameUI/Button" to="GameUI/Button" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="GameUI/Button" to="GameUI/Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GameUI/Button" to="GameUI/Button" method="_on_mouse_exited"]

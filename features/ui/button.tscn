@@ -1,0 +1,130 @@
+[gd_scene load_steps=10 format=3 uid="uid://cksxtna1echs7"]
+
+[ext_resource type="Script" uid="uid://bqpf14m0kd1jx" path="res://features/ui/button.gd" id="1_tyy6o"]
+[ext_resource type="Texture2D" uid="uid://5wag32iqits0" path="res://assets/button.png" id="2_hdvvn"]
+[ext_resource type="Shader" uid="uid://bkj0w3hkaxktb" path="res://features/shaders/shine.gdshader" id="3_crkxk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ca42v"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ir15t"]
+resource_local_to_scene = true
+shader = ExtResource("3_crkxk")
+shader_parameter/Line_Smoothness = 0.027
+shader_parameter/Line_Width = 0.095
+shader_parameter/Brightness = 1.0
+shader_parameter/Rotation_deg = 26.252
+shader_parameter/Distortion = 1.73
+shader_parameter/Speed = 0.2
+shader_parameter/Position = 0.195
+shader_parameter/Position_Min = 1.0
+shader_parameter/Position_Max = 2.0
+shader_parameter/Alpha = 0.225
+
+[sub_resource type="Animation" id="Animation_rysoc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.21239, 1.23729)]
+}
+
+[sub_resource type="Animation" id="Animation_ca42v"]
+resource_name = "hover_in"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.21239, 1.23729), Vector2(1.4, 1.429)]
+}
+
+[sub_resource type="Animation" id="Animation_ssvqc"]
+resource_name = "hover_out"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.4, 1.429), Vector2(1.21239, 1.23729)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ssvqc"]
+_data = {
+&"RESET": SubResource("Animation_rysoc"),
+&"hover_in": SubResource("Animation_ca42v"),
+&"hover_out": SubResource("Animation_ssvqc")
+}
+
+[node name="Button" type="Button"]
+modulate = Color(0.981922, 0.966886, 0.996364, 1)
+self_modulate = Color(0.640521, 0.602809, 0.641518, 1)
+material = SubResource("ShaderMaterial_ca42v")
+offset_left = 370.0
+offset_top = -32.0
+offset_right = 512.0
+offset_bottom = 41.0
+script = ExtResource("1_tyy6o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(70.5, 35.5)
+scale = Vector2(1.21239, 1.23729)
+texture = ExtResource("2_hdvvn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Sprite2D"]
+process_priority = -1
+physics_interpolation_mode = 2
+layer = 0
+visible = false
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D/CanvasLayer"]
+material = SubResource("ShaderMaterial_ir15t")
+anchors_preset = -1
+anchor_left = 0.381
+anchor_top = 0.007
+anchor_right = 0.381
+anchor_bottom = 0.007
+offset_left = -58.912
+offset_top = -24.536
+offset_right = 62.088
+offset_bottom = 30.464
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 70.0
+text = "Cancel"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ssvqc")
+}
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
