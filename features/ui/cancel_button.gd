@@ -20,31 +20,14 @@ func on_enable():
 	apply_styles()
 
 func _ready() -> void:
-	z_index = 10
-	z_as_relative = false
-	#canvas_layer.visible = true
 	apply_styles()
 	
 var vfx__redraw_required = false
 
 func apply_styles():
-	var style = StyleBoxFlat.new()
-	style.corner_radius_top_left = 16
-	style.corner_radius_top_right = 16
-	style.corner_radius_bottom_left = 16
-	style.corner_radius_bottom_right = 16
 
-	if hover_state:
-		style.bg_color = Color.YELLOW
-		label.add_theme_color_override("font_color", Color.YELLOW)
-	else:
-		style.bg_color = Color.DARK_GRAY
-		label.add_theme_color_override("font_color", Color.WHITE)
-	
 	if disabled_state:
 		var shader = Shader.new()
-		sprite_2d.modulate = Color(0.3, 0.3, 0.3, 0.5)
-		style.bg_color = Color.BLACK
 		shader.code = """
 			shader_type canvas_item;
 			void fragment() {
@@ -58,9 +41,6 @@ func apply_styles():
 		material = mat
 	else:
 		material = null
-	for value in ["normal", "hover", "pressed", "focus"]:
-		add_theme_stylebox_override(value, style)
-		
 	
 		
 func _on_mouse_entered() -> void:
@@ -68,28 +48,18 @@ func _on_mouse_entered() -> void:
 		return
 	hover_state = true
 	apply_styles()
-	#canvas_layer.visible = false
-	anim.play("hover_in")
 
 func _on_mouse_exited() -> void:
 	if disabled_state:
 		return
 	hover_state = false
 	apply_styles()
-	#canvas_layer.visible = true
-	anim.play("hover_out")
 	
-var style_timer := 0.0
-const STYLE_INTERVAL := 2.0  # seconds
 
 func _process(delta: float) -> void:
-	style_timer += delta
-	if style_timer >= STYLE_INTERVAL:
-		style_timer = 0.0
-
-		var player_cards = get_player_cards_on_the_fields()
-		disabled_state = player_cards.size() == 0
-		apply_styles()
+	var player_cards = get_player_cards_on_the_fields()
+	disabled_state = player_cards.size() == 0
+	apply_styles()
 		
 
 
@@ -104,6 +74,7 @@ func get_player_cards_on_the_fields():
 func _on_pressed() -> void:
 	var player_cards = get_player_cards_on_the_fields()
 	for card in player_cards:
+		card.on_enable_trash()
 		player_hand.add_card_to_hand(card)
 	
 	grid_manager.clear_row(1)

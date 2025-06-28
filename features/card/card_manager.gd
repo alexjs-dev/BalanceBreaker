@@ -12,9 +12,14 @@ var player_hand_reference
 @export var is_enabled = true
 @onready var card_place_sound: AudioStreamPlayer2D = $CardPlaceSound
 @onready var trash_place_sound: AudioStreamPlayer2D = $TrashPlaceSound
+@onready var grid_manager: Node2D = $"../GridManager"
+@onready var game_state: GameStateManager = $".."
 
 @onready var trash: Node2D = $"../Trash"
-
+const HOVER_SHADER_PATH = "res://features/shaders/hovercard.gdshader"
+var hover_shader : Shader
+var hover_material : ShaderMaterial
+	
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	player_hand_reference = $"../PlayerHand"
@@ -26,7 +31,14 @@ func _ready() -> void:
 func start_drag(card):
 	if !is_enabled:
 		return
+	if card.is_being_destroyed:
+		return
 	dragging_card = card
+	# hover_shader = load(HOVER_SHADER_PATH)
+	# hover_material = ShaderMaterial.new()
+	# hover_material.shader = hover_shader
+	# var card_sprite = card.get_node("Sprite2D")
+	# card_sprite.material = hover_material.duplicate()
 	
 func on_left_click_released():
 	if dragging_card:
@@ -37,17 +49,14 @@ func finish_drag():
 		var target_rotation = deg_to_rad(0)
 		var tween = get_tree().create_tween()
 		tween.tween_property(dragging_card, "rotation", target_rotation, 0.1).set_trans(Tween.TRANS_SINE)
-
+		var card_sprite = dragging_card.get_node("Sprite2D")
+		card_sprite.material = null
 
 		if is_card_over_trash():
-			player_hand_reference.remove_card_from_hand(dragging_card)
-			dragging_card.queue_free()
+			trash.put_card_to_trash(dragging_card)
 			dragging_card = null
 			rotation_direction = null
-			trash.on_card_discard()
-			trash_place_sound.play()
 			return
-		var grid_manager = $"../GridManager"
 		var mouse_pos = get_global_mouse_position()
 		var result = grid_manager.get_slot_under_position(mouse_pos)
 
@@ -72,6 +81,7 @@ func finish_drag():
 				dragging_card.get_node("Sprite2D").material = null
 				dragging_card.get_node("Area2D/CollisionShape2D").disabled = true
 				dragging_card.z_index = 1  # Keep it below hovered cards
+				dragging_card.on_disable_trash()
 				grid_manager.slots[row][col].card_in_slot = dragging_card
 				grid_manager.slots[row][col].blocked = true
 				
@@ -89,6 +99,7 @@ func finish_drag():
 
 func reset_card_to_hand():
 	dragging_card.z_index = 0
+	dragging_card.on_enable_trash()
 	player_hand_reference.add_card_to_hand(dragging_card)
 
 	
@@ -114,8 +125,25 @@ func handle_card_rotation(dragging_card):
 var old_mouse_pos = Vector2(0, 0)
 func _process(delta: float) -> void:
 	if dragging_card != null and dragging_card is Node2D:
+		if dragging_card.is_being_destroyed:
+			return
 		var mouse_pos = get_global_mouse_position()
 		var sprite = null
+		var grid_hover = grid_manager.get_slot_under_position(mouse_pos)
+		var col = grid_hover[2]
+		var enemy_card = grid_manager.get_opposing_card_by_col(col)
+		if enemy_card:
+			var opposite_card_incoming_result = game_state.compare_elements(dragging_card.card_data.element, enemy_card.card_data.element)
+			print(opposite_card_incoming_result)
+			match opposite_card_incoming_result:
+				"win":
+					dragging_card.set_card_tint(Color(0.3, 1.0, 0.3))
+				"lose":
+					dragging_card.set_card_tint(Color(1.0, 0.3, 0.3))
+				"draw":
+					dragging_card.set_card_tint(Color(1.0, 0.3, 0.3))
+
+		
 		for card_child in dragging_card.get_children(false):
 			if card_child is Sprite2D:
 				sprite = card_child

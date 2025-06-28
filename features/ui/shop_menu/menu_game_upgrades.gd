@@ -1,6 +1,6 @@
 extends Control
 
-@onready var points_count_label: Label = $MarginContainer/VBoxContainer/PointsCountLabel
+@onready var points_count_label: Label = $PointsCountLabel
 
 func _process(delta: float) -> void:
 	var game_state_manager = get_node("/root/Game") # Adjust path if your GameStateManager is not a singleton

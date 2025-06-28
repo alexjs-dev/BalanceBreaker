@@ -1,10 +1,51 @@
 extends Node2D
 
 const CARD_SCENE_PATH = "res://features/card/card.tscn"
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 var player_deck: Array[CardData] = []
 var original_deck: Array[CardData] = []
+var is_hover = false
 
+func apply_styles():
+	if is_hover:
+		var shader = Shader.new()
+		shader.code = """
+			shader_type canvas_item;
+			void fragment() {
+				vec4 tex_color = texture(TEXTURE, UV);
+				vec3 yellow_tint = vec3(1.0, 1.0, 0.5); // warm yellow
+				COLOR.rgb = mix(tex_color.rgb, yellow_tint, 0.4);
+				COLOR.a = tex_color.a;
+			}
+		"""
+		var mat = ShaderMaterial.new()
+		mat.shader = shader
+		sprite_2d.material = mat
+	else:
+		sprite_2d.material = null
+
+
+func _on_area_2d_mouse_entered() -> void:
+	print("hover")
+	is_hover = true
+	apply_styles()
+
+
+func _on_area_2d_mouse_exited() -> void:
+	is_hover = false
+	apply_styles()
+
+		
+func _on_mouse_entered() -> void:
+	print("hover")
+	is_hover = true
+	apply_styles()
+
+
+func _on_mouse_exited() -> void:
+	is_hover = false
+	apply_styles()
 
 @export var is_enabled = true
 @export var use_random_deck := false
@@ -22,14 +63,16 @@ var original_deck: Array[CardData] = []
 @onready var sprite := $Sprite2D
 @onready var label := $Label
 @onready var player_hand_reference: Node2D = $"../PlayerHand"
-
+var mesh 
 var possible_elements = ["Fire", "Water", "Earth", "Air", "Ice", "Light", "Dark"]
+
+
 
 func _ready() -> void:
 	generate_deck()
 	player_deck.shuffle()
 	label.text = str(player_deck.size())
-	
+	mesh = get_node("Sprite2D/MeshInstance2D")
 	var label_size = label.get_size()
 	label.position = sprite.position - (label_size / 2)
 
@@ -100,7 +143,6 @@ func draw_card() -> void:
 	var cards_in_hand = player_hand_reference.player_hand.size()
 	if cards_in_hand >= player_hand_reference.max_hand_size:
 		return
-
 	var cards_to_draw = min(player_hand_reference.max_hand_size - cards_in_hand, player_deck.size())
 
 	for i in range(cards_to_draw):
@@ -123,3 +165,12 @@ func disable_deck_visuals():
 	collision_shape.disabled = true
 	sprite.visible = false
 	label.visible = false
+	
+func _process(delta: float) -> void:
+	pass
+	#var cards_in_hand = player_hand_reference.player_hand.size()
+	#if cards_in_hand >= player_hand_reference.max_hand_size:
+		#mesh.visible = false
+	#else:
+		#mesh.visible = true
+	

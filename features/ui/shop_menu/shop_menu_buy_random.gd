@@ -1,5 +1,6 @@
 extends Button
 @onready var popup: Node2D = $"../../../../../Popup"
+@onready var card_purchase_sound: AudioStreamPlayer2D = $"../../../CardPurchaseSound"
 
 func _process(delta: float) -> void:
 	var game_state_manager = get_node("/root/Game")
@@ -16,5 +17,10 @@ func _on_pressed() -> void:
 	var shop_manager = get_node("/root/Game/Shop")
 	var result = shop_manager.purchase_random_card(points)
 	game_state_manager.total_shop_points -= 10
+	var roman_tiers = ["I", "II", "III"]
+	var card_data = result["card"]
+	var tier_str = roman_tiers[clamp(card_data.tier - 1, 0, 2)]
+	var full_card_text = "%s %s" % [card_data.element, tier_str]
 	if result.has("card"):
-		popup.show_text_popup(result["card"], "You have discovered a card!")
+		card_purchase_sound.play()
+		popup.show_text_popup("Found: %s" % full_card_text)

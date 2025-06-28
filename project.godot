@@ -13,7 +13,7 @@ config_version=5
 config/name="GameJamOpposites"
 run/main_scene="uid://wqka872mq3t6"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="uid://dtvc5fes8cllg"
+config/icon="uid://bsqww7vr4nu4u"
 
 [autoload]
 
@@ -21,6 +21,8 @@ DisplayValue="*res://features/animations/display_value.gd"
 
 [display]
 
+window/size/viewport_width=1200
+window/size/viewport_height=920
 window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
@@ -29,3 +31,10 @@ window/stretch/aspect="expand"
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
+
+[shader_globals]
+
+mouse_screen_pos={
+"type": "vec2",
+"value": Vector2(0, 0)
+}

@@ -3,8 +3,8 @@ extends Node2D
 @export var columns: int = 5
 @export var rows: int = 2
 @export var cell_size: Vector2 = Vector2(128, 190)
-@export var line_color: Color = Color.BLACK
-@export var line_thickness: float = 2.0
+@export var line_color: Color = Color.WHITE
+@export var line_thickness: float = 3.0
 @onready var camera: Camera2D = $"../Camera"
 
 var OFFSET_Y = 48
@@ -25,7 +25,7 @@ func _draw():
 		var y = row * cell_size.y
 		var current_color = line_color
 		if blocked_rows.has(row):
-			current_color = Color.RED  # Optional visual indicator
+			current_color = Color.WHITE  # Optional visual indicator
 		draw_line(Vector2(0, y), Vector2(columns * cell_size.x, y), current_color, line_thickness)
 
 func clear_row(row_index: int) -> void:
@@ -38,6 +38,15 @@ func clear_row(row_index: int) -> void:
 				slot.blocked = false
 
 
+func get_opposing_card_by_col(col):
+	# this only works for 2 rows. 0 enemy, 1 player.
+	var enemy_row = 0
+	var enemy_grid_slot = slots[enemy_row][col]
+	if enemy_grid_slot:
+		return enemy_grid_slot.card_in_slot
+	return null
+	
+	
 
 func position_grid():
 	if camera:

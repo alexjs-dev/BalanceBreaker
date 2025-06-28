@@ -1,9 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://df5qyw63v1o7k"]
+[gd_scene load_steps=24 format=3 uid="uid://df5qyw63v1o7k"]
 
 [ext_resource type="Script" uid="uid://crxie574k6a8g" path="res://features/card/card.gd" id="1_4hiay"]
-[ext_resource type="Texture2D" uid="uid://ditji348a4e1k" path="res://assets/card-front.png" id="2_7oeae"]
 [ext_resource type="Script" uid="uid://cewym5qp80d3h" path="res://features/card/card_data.gd" id="2_qfeef"]
 [ext_resource type="Shader" uid="uid://clyxw7flf6wl5" path="res://features/shaders/red_tint.gdshader" id="3_igsg2"]
+[ext_resource type="Texture2D" uid="uid://ditji348a4e1k" path="res://assets/card-front.png" id="4_inif0"]
+[ext_resource type="FontFile" uid="uid://bj0frlyncdc6e" path="res://fonts/Pixelme.ttf" id="5_qfeef"]
+[ext_resource type="Texture2D" uid="uid://dceswep15038i" path="res://assets/fire.png" id="6_aeupa"]
+[ext_resource type="Texture2D" uid="uid://dj1qnn5787kpg" path="res://assets/ice.png" id="6_ddbgg"]
+[ext_resource type="Texture2D" uid="uid://kx4si6c8pcv6" path="res://assets/trash-icon.png" id="6_g24rp"]
+[ext_resource type="Shader" uid="uid://b17ajkl0tsnjc" path="res://features/shaders/burn.gdshader" id="6_inif0"]
+[ext_resource type="Script" uid="uid://clnb2ypa0qbv4" path="res://features/card/button_trash_card.gd" id="6_rmyd7"]
+[ext_resource type="Texture2D" uid="uid://r1cnq1uxoh5y" path="res://assets/water.png" id="7_yyom6"]
+[ext_resource type="Texture2D" uid="uid://buf5m2dx4o0uj" path="res://assets/earth.png" id="8_87y12"]
+[ext_resource type="Texture2D" uid="uid://dal2qlf3ir7js" path="res://assets/dark.png" id="8_g24rp"]
+[ext_resource type="Texture2D" uid="uid://oleejtsf7vt5" path="res://assets/air.png" id="9_rmyd7"]
+[ext_resource type="Texture2D" uid="uid://cdkq2tt2561k2" path="res://assets/light.png" id="10_inif0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ddbgg"]
 
@@ -11,18 +22,253 @@
 script = ExtResource("2_qfeef")
 element = "Fire"
 tier = 1
-display_name = "Fire"
+is_hero = false
+archetype = ""
+display_name = ""
+config = [{
+"clan": "dragon",
+"combat_types": ["melee"],
+"combo_sources": null,
+"content": {
+"name": {
+"en": "Peasant"
+}
+},
+"is_hero": false,
+"name": "peasant",
+"stats": {
+"damage": 1,
+"health": 1
+},
+"tier": 1
+}, {
+"clan": "dragon",
+"combat_types": ["melee"],
+"combo_sources": ["peasant"],
+"content": {
+"name": {
+"en": "Kensei Trainee"
+}
+},
+"is_hero": false,
+"name": "kensei_trainee",
+"stats": {
+"damage": 3,
+"health": 3
+},
+"tier": 2
+}, {
+"clan": "dragon",
+"combat_types": ["archer"],
+"combo_sources": ["peasant"],
+"content": {
+"name": {
+"en": "Yumiya Cadet"
+}
+},
+"is_hero": false,
+"name": "yumiya_cadet",
+"stats": {
+"damage": 2,
+"health": 1,
+"range": 3
+},
+"tier": 2
+}, {
+"clan": "dragon",
+"combat_types": ["magic"],
+"combo_sources": ["peasant"],
+"content": {
+"name": {
+"en": "Onmyōji Acolyte"
+}
+},
+"is_hero": false,
+"name": "onmyoji_acolyte",
+"stats": {
+"damage": 3,
+"health": 1,
+"range": 2
+},
+"tier": 2
+}, {
+"clan": "dragon",
+"combat_types": ["melee"],
+"combo_sources": ["peasant"],
+"content": {
+"name": {
+"en": "Geisha Healer"
+}
+},
+"is_hero": false,
+"name": "geisha_healer",
+"stats": {
+"damage": 1,
+"health": 2
+},
+"tier": 2
+}, {
+"clan": "dragon",
+"combat_types": ["melee", "archer"],
+"combo_sources": ["kensei_trainee", "yumiya_cadet"],
+"content": {
+"name": {
+"en": "Tsurugi Hayabusa"
+}
+},
+"is_hero": false,
+"name": "tsurugi_hayabusa",
+"stats": {
+"damage": 3,
+"health": 4,
+"range": 3
+},
+"tier": 3
+}, {
+"clan": "dragon",
+"combat_types": ["archer", "magic"],
+"combo_sources": ["yumiya_cadet", "onmyoji_acolyte"],
+"content": {
+"name": {
+"en": "Kōkyūshi"
+}
+},
+"is_hero": false,
+"name": "kokyushi",
+"stats": {
+"damage": 3,
+"health": 2,
+"range": 4
+},
+"tier": 3
+}, {
+"clan": "dragon",
+"combat_types": ["melee", "magic"],
+"combo_sources": ["kensei_trainee", "onmyoji_acolyte"],
+"content": {
+"name": {
+"en": "Mahō Kenshi"
+}
+},
+"is_hero": false,
+"name": "maho_kenshi",
+"stats": {
+"damage": 4,
+"health": 4,
+"range": 2
+},
+"tier": 3
+}, {
+"clan": "dragon",
+"combat_types": ["melee", "archer", "magic"],
+"combo_sources": ["kensei_trainee", "yumiya_cadet", "onmyoji_acolyte"],
+"content": {
+"name": {
+"en": "Arcane Warlord"
+}
+},
+"is_hero": false,
+"name": "arcane_warlord",
+"stats": {
+"damage": 7,
+"health": 7,
+"range": 6
+},
+"tier": 4
+}, {
+"clan": "dragon",
+"combat_types": ["melee", "magic"],
+"combo_sources": null,
+"content": {
+"name": {
+"en": "Hattori the Shadowblade"
+}
+},
+"effects": [{
+"count": 3,
+"type": "shadow"
+}],
+"is_hero": true,
+"name": "hattori_shadowblade",
+"stats": {
+"damage": 8,
+"health": 8,
+"range": 2
+},
+"tier": 4
+}, {
+"clan": "dragon",
+"combat_types": ["archer", "magic"],
+"combo_sources": null,
+"content": {
+"name": {
+"en": "Kazemaru the Stormcaller"
+}
+},
+"effects": [{
+"type": "electric_field"
+}, {
+"chance": 0.25,
+"type": "electric_arrow"
+}],
+"is_hero": true,
+"name": "kazemaru_stormcaller",
+"stats": {
+"damage": 8,
+"health": 4,
+"range": 8
+},
+"tier": 4
+}, {
+"clan": "dragon",
+"combat_types": ["melee", "archer", "magic"],
+"combo_sources": null,
+"content": {
+"name": {
+"en": "Ryūjin Overlord"
+}
+},
+"effects": [{
+"type": "berserk"
+}],
+"is_hero": true,
+"name": "ryujin_overlord",
+"stats": {
+"damage": 6,
+"health": 12,
+"range": 4
+},
+"tier": 4
+}]
 metadata/_custom_type_script = "uid://cewym5qp80d3h"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_igsg2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_714ru"]
 resource_local_to_scene = true
 shader = ExtResource("3_igsg2")
-shader_parameter/tint_strength = 0.22
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iywne"]
-atlas = ExtResource("2_7oeae")
+shader_parameter/tint_strength = 0.0
+shader_parameter/tint_color = Color(0.522683, 0.274444, 0.907133, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
+size = Vector2(128, 190)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g24rp"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rmyd7"]
+noise = SubResource("FastNoiseLite_g24rp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kk8sn"]
+resource_local_to_scene = true
+shader = ExtResource("6_inif0")
+shader_parameter/percentage = 0.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_rmyd7")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[sub_resource type="QuadMesh" id="QuadMesh_3cf12"]
 size = Vector2(128, 190)
 
 [node name="Card" type="Node2D" groups=["card"]]
@@ -31,8 +277,8 @@ script = ExtResource("1_4hiay")
 card_data = SubResource("Resource_ddbgg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_igsg2")
-texture = SubResource("AtlasTexture_iywne")
+material = SubResource("ShaderMaterial_714ru")
+texture = ExtResource("4_inif0")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
@@ -46,7 +292,185 @@ offset_left = -43.0
 offset_top = 49.0
 offset_right = 4.0
 offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("5_qfeef")
 text = "Water"
+
+[node name="TrashButton" type="TextureButton" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 22.0
+offset_top = 48.0
+offset_right = 70.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.36, 1.44)
+script = ExtResource("6_rmyd7")
+metadata/_edit_use_anchors_ = true
+
+[node name="TrashIcon" type="Sprite2D" parent="TrashButton"]
+z_index = 1
+position = Vector2(5, 7)
+scale = Vector2(0.148438, 0.136719)
+texture = ExtResource("6_g24rp")
+centered = false
+
+[node name="BurnShader" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_kk8sn")
+position = Vector2(1, 2)
+mesh = SubResource("QuadMesh_3cf12")
+
+[node name="ElementFire1" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("6_aeupa")
+region_enabled = true
+region_rect = Rect2(0, 170, 106, 190)
+
+[node name="ElementWater1" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("7_yyom6")
+region_enabled = true
+region_rect = Rect2(0, 66, 112, 161)
+
+[node name="ElementDark1" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("8_g24rp")
+region_enabled = true
+region_rect = Rect2(0, 104, 108, 118)
+
+[node name="ElementAir1" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_rmyd7")
+region_enabled = true
+region_rect = Rect2(0, 176, 134, 70)
+
+[node name="ElementLight1" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("10_inif0")
+region_enabled = true
+region_rect = Rect2(0, 160, 68, 69)
+
+[node name="ElementLight2" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("10_inif0")
+region_enabled = true
+region_rect = Rect2(122, 43, 161, 196)
+
+[node name="ElementLight3" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("10_inif0")
+region_enabled = true
+region_rect = Rect2(292, 0, 239, 256)
+
+[node name="ElementAir2" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_rmyd7")
+region_enabled = true
+region_rect = Rect2(148, 75, 204, 171)
+
+[node name="ElementAir3" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_rmyd7")
+region_enabled = true
+region_rect = Rect2(356, 0, 225, 256)
+
+[node name="ElementDark2" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_g24rp")
+region_enabled = true
+region_rect = Rect2(175, 28, 208, 216)
+
+[node name="ElementDark3" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_g24rp")
+region_enabled = true
+region_rect = Rect2(433, 0, 236, 256)
+
+[node name="ElementWater2" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("7_yyom6")
+region_enabled = true
+region_rect = Rect2(186, 25, 233, 223)
+
+[node name="ElementWater3" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("7_yyom6")
+region_enabled = true
+region_rect = Rect2(456, 0, 266, 256)
+
+[node name="ElementFire2" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("6_aeupa")
+region_enabled = true
+region_rect = Rect2(159, 119, 171, 241)
+
+[node name="ElementFire3" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_aeupa")
+region_enabled = true
+region_rect = Rect2(359, 22, 188, 338)
+
+[node name="ElementIce1" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_ddbgg")
+region_enabled = true
+region_rect = Rect2(7, 83, 63, 53)
+
+[node name="ElementEarth1" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("8_87y12")
+region_enabled = true
+region_rect = Rect2(0, 186, 111, 66)
+
+[node name="ElementEarth2" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_87y12")
+region_enabled = true
+region_rect = Rect2(122, 96, 183, 156)
+
+[node name="ElementEarth3" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_87y12")
+region_enabled = true
+region_rect = Rect2(312, 0, 183, 252)
+
+[node name="ElementIce2" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_ddbgg")
+region_enabled = true
+region_rect = Rect2(88, 46, 70, 90)
+
+[node name="ElementIce3" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_ddbgg")
+region_enabled = true
+region_rect = Rect2(173, 29, 73, 109)
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="button_down" from="TrashButton" to="TrashButton" method="_on_button_down"]
+[connection signal="mouse_entered" from="TrashButton" to="TrashButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TrashButton" to="TrashButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="TrashButton" to="TrashButton" method="_on_pressed"]
