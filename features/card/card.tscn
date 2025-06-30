@@ -24,77 +24,78 @@ element = "Fire"
 tier = 1
 is_hero = false
 archetype = ""
+clan = "Crane"
 display_name = ""
 config = [{
-"clan": "dragon",
+"clan": "Crane",
 "combat_types": ["melee"],
 "combo_sources": null,
 "content": {
 "name": {
-"en": "Peasant"
+"en": "Villager"
 }
 },
 "is_hero": false,
-"name": "peasant",
+"name": "villager",
 "stats": {
 "damage": 1,
 "health": 1
 },
 "tier": 1
 }, {
-"clan": "dragon",
+"clan": "Crane",
 "combat_types": ["melee"],
-"combo_sources": ["peasant"],
+"combo_sources": ["villager"],
 "content": {
 "name": {
-"en": "Kensei Trainee"
+"en": "Blade Guard"
 }
 },
 "is_hero": false,
-"name": "kensei_trainee",
+"name": "blade_guard",
 "stats": {
 "damage": 3,
 "health": 3
 },
 "tier": 2
 }, {
-"clan": "dragon",
+"clan": "Crane",
 "combat_types": ["archer"],
-"combo_sources": ["peasant"],
+"combo_sources": ["villager"],
 "content": {
 "name": {
-"en": "Yumiya Cadet"
+"en": "Sky Archer"
 }
 },
 "is_hero": false,
-"name": "yumiya_cadet",
+"name": "sky_archer",
 "stats": {
 "damage": 2,
-"health": 1,
+"health": 2,
+"range": 4
+},
+"tier": 2
+}, {
+"clan": "Crane",
+"combat_types": ["magic"],
+"combo_sources": ["villager"],
+"content": {
+"name": {
+"en": "Spirit Weaver"
+}
+},
+"is_hero": false,
+"name": "spirit_weaver",
+"stats": {
+"damage": 3,
+"health": 2,
 "range": 3
 },
 "tier": 2
 }, {
-"clan": "dragon",
-"combat_types": ["magic"],
-"combo_sources": ["peasant"],
-"content": {
-"name": {
-"en": "Onmyōji Acolyte"
-}
-},
-"is_hero": false,
-"name": "onmyoji_acolyte",
-"stats": {
-"damage": 3,
-"health": 1,
-"range": 2
-},
-"tier": 2
-}, {
-"clan": "dragon",
+"clan": "Crane",
 "combat_types": ["melee"],
-"combo_sources": ["peasant"],
+"combo_sources": ["villager"],
 "content": {
 "name": {
 "en": "Geisha Healer"
@@ -104,138 +105,136 @@ config = [{
 "name": "geisha_healer",
 "stats": {
 "damage": 1,
-"health": 2
+"health": 3
 },
 "tier": 2
 }, {
-"clan": "dragon",
+"clan": "Crane",
 "combat_types": ["melee", "archer"],
-"combo_sources": ["kensei_trainee", "yumiya_cadet"],
+"combo_sources": ["blade_guard", "sky_archer"],
 "content": {
 "name": {
-"en": "Tsurugi Hayabusa"
+"en": "Blade Archer"
 }
 },
 "is_hero": false,
-"name": "tsurugi_hayabusa",
+"name": "blade_archer",
 "stats": {
-"damage": 3,
-"health": 4,
-"range": 3
-},
-"tier": 3
-}, {
-"clan": "dragon",
-"combat_types": ["archer", "magic"],
-"combo_sources": ["yumiya_cadet", "onmyoji_acolyte"],
-"content": {
-"name": {
-"en": "Kōkyūshi"
-}
-},
-"is_hero": false,
-"name": "kokyushi",
-"stats": {
-"damage": 3,
-"health": 2,
+"damage": 4,
+"health": 5,
 "range": 4
 },
 "tier": 3
 }, {
-"clan": "dragon",
+"clan": "Crane",
 "combat_types": ["melee", "magic"],
-"combo_sources": ["kensei_trainee", "onmyoji_acolyte"],
+"combo_sources": ["blade_guard", "spirit_weaver"],
 "content": {
 "name": {
-"en": "Mahō Kenshi"
+"en": "Mystic Blade"
 }
 },
 "is_hero": false,
-"name": "maho_kenshi",
+"name": "mystic_blade",
 "stats": {
-"damage": 4,
-"health": 4,
-"range": 2
+"damage": 5,
+"health": 5,
+"range": 3
 },
 "tier": 3
 }, {
-"clan": "dragon",
-"combat_types": ["melee", "archer", "magic"],
-"combo_sources": ["kensei_trainee", "yumiya_cadet", "onmyoji_acolyte"],
+"clan": "Crane",
+"combat_types": ["archer", "magic"],
+"combo_sources": ["sky_archer", "spirit_weaver"],
 "content": {
 "name": {
-"en": "Arcane Warlord"
+"en": "Arcane Ranger"
 }
 },
 "is_hero": false,
-"name": "arcane_warlord",
+"name": "arcane_ranger",
+"stats": {
+"damage": 4,
+"health": 4,
+"range": 5
+},
+"tier": 3
+}, {
+"clan": "Crane",
+"combat_types": ["melee", "archer", "magic"],
+"combo_sources": ["blade_guard", "sky_archer", "spirit_weaver"],
+"content": {
+"name": {
+"en": "Grand Warlord"
+}
+},
+"is_hero": false,
+"name": "grand_warlord",
 "stats": {
 "damage": 7,
-"health": 7,
+"health": 8,
 "range": 6
 },
 "tier": 4
 }, {
-"clan": "dragon",
-"combat_types": ["melee", "magic"],
+"clan": "Crane",
+"combat_types": ["melee"],
 "combo_sources": null,
 "content": {
 "name": {
-"en": "Hattori the Shadowblade"
+"en": "Samurai Champion"
 }
 },
 "effects": [{
-"count": 3,
-"type": "shadow"
+"bonus": 2,
+"type": "focus_strike"
 }],
 "is_hero": true,
-"name": "hattori_shadowblade",
+"name": "crane_samurai_champion",
 "stats": {
 "damage": 8,
-"health": 8,
-"range": 2
+"health": 10
 },
 "tier": 4
 }, {
-"clan": "dragon",
-"combat_types": ["archer", "magic"],
+"clan": "Crane",
+"combat_types": ["magic"],
 "combo_sources": null,
 "content": {
 "name": {
-"en": "Kazemaru the Stormcaller"
+"en": "Moon Priestess"
 }
 },
 "effects": [{
-"type": "electric_field"
-}, {
-"chance": 0.25,
-"type": "electric_arrow"
+"radius": 2,
+"type": "healing_wave"
 }],
 "is_hero": true,
-"name": "kazemaru_stormcaller",
-"stats": {
-"damage": 8,
-"health": 4,
-"range": 8
-},
-"tier": 4
-}, {
-"clan": "dragon",
-"combat_types": ["melee", "archer", "magic"],
-"combo_sources": null,
-"content": {
-"name": {
-"en": "Ryūjin Overlord"
-}
-},
-"effects": [{
-"type": "berserk"
-}],
-"is_hero": true,
-"name": "ryujin_overlord",
+"name": "crane_moon_priestess",
 "stats": {
 "damage": 6,
-"health": 12,
+"health": 6,
+"range": 6
+},
+"tier": 4
+}, {
+"clan": "Crane",
+"combat_types": ["melee", "archer"],
+"combo_sources": null,
+"content": {
+"name": {
+"en": "Shadow Blade"
+}
+},
+"effects": [{
+"stun": 1,
+"type": "shadow_step"
+}],
+"is_hero": true,
+"name": "crane_shadow_blade",
+"stats": {
+"damage": 7,
+"health": 9,
 "range": 4
 },
 "tier": 4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://wqka872mq3t6"]
+[gd_scene load_steps=60 format=3 uid="uid://wqka872mq3t6"]
 
 [ext_resource type="Script" uid="uid://djsk667xqnjln" path="res://features/game/game_state.gd" id="1_0tnpc"]
 [ext_resource type="Script" uid="uid://dqjf21dqg0v24" path="res://features/grid/grid_manager.gd" id="1_uwrxv"]
@@ -37,6 +37,9 @@
 [ext_resource type="Script" uid="uid://r5bhiuf8dv72" path="res://features/misc/sprite_full_screen.gd" id="31_nepv3"]
 [ext_resource type="Script" uid="uid://cgbvwkw1knpxr" path="res://features/ui/popup_text.gd" id="31_qouja"]
 [ext_resource type="AudioStream" uid="uid://d1hsigb3256qh" path="res://sfx/dice-throw-1.ogg" id="34_02fa5"]
+[ext_resource type="Script" uid="uid://248mylwhb561" path="res://features/card_new/card_new.gd" id="38_7025r"]
+[ext_resource type="Texture2D" uid="uid://ditji348a4e1k" path="res://assets/card-front.png" id="39_m4url"]
+[ext_resource type="Texture2D" uid="uid://dceswep15038i" path="res://assets/fire.png" id="40_m4url"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_js0lu"]
 shader = ExtResource("11_kvpfn")
@@ -356,6 +359,7 @@ theme_override_font_sizes/font_size = 64
 stream = ExtResource("12_dinhu")
 
 [node name="GameMenuUI" type="Node2D" parent="."]
+visible = false
 
 [node name="MenuGameOver" type="Control" parent="GameMenuUI"]
 visible = false
@@ -552,6 +556,68 @@ script = ExtResource("30_sgl2t")
 
 [node name="Popup" type="Node2D" parent="."]
 script = ExtResource("31_qouja")
+
+[node name="CardNew" type="Node2D" parent="."]
+script = ExtResource("38_7025r")
+
+[node name="Sprite2D" type="Sprite2D" parent="CardNew"]
+texture = ExtResource("39_m4url")
+
+[node name="CardNameLabel" type="RichTextLabel" parent="CardNew"]
+offset_left = -46.0
+offset_top = 39.0
+offset_right = 46.0
+offset_bottom = 79.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("16_js0lu")
+theme_override_fonts/mono_font = ExtResource("16_js0lu")
+theme_override_fonts/italics_font = ExtResource("16_js0lu")
+theme_override_fonts/bold_italics_font = ExtResource("16_js0lu")
+theme_override_fonts/bold_font = ExtResource("16_js0lu")
+text = "Peasant"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardAttackLabel" type="Label" parent="CardNew"]
+offset_left = -47.0
+offset_top = -78.0
+offset_right = -17.0
+offset_bottom = -53.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("16_js0lu")
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardHealthLabel" type="Label" parent="CardNew"]
+offset_left = 17.0
+offset_top = -78.0
+offset_right = 47.0
+offset_bottom = -53.0
+theme_override_colors/font_color = Color(0.647335, 0, 0.134662, 1)
+theme_override_fonts/font = ExtResource("16_js0lu")
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Effects" type="Node2D" parent="CardNew"]
+
+[node name="Control" type="Control" parent="CardNew/Effects"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -36.0
+offset_top = -3.0
+offset_right = -36.0
+offset_bottom = -3.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardNew/Effects/Control"]
+layout_mode = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="CardNew/Effects/Control/VBoxContainer"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("40_m4url")
+region_enabled = true
+region_rect = Rect2(0, 170, 106, 190)
 
 [connection signal="mouse_entered" from="Deck/Area2D" to="Deck" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Deck/Area2D" to="Deck" method="_on_area_2d_mouse_exited"]
